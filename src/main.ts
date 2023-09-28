@@ -89,3 +89,62 @@ obj = {
   a: 1,
   b: "A",
 };
+
+// - Generic : Định dạng return về một hàm không xác định và mình sẽ quy định hàm mình sẽ trả ra là như nào
+function getData<T>(url: string): T {
+  return {} as T;
+}
+
+const data1 = getData<Student[]>("QuanLyPhim/LayDanhSachPhim");
+const data12 = getData<Student>("QuanLyPhim/LayThongTinPhim");
+
+// const resp1 = axios.get<Movie[]>("QuanLyPhim/LayThongTinPhim");
+
+const btnEl = <HTMLButtonElement>document.getElementById("btn-submit");
+
+const inpEl = <HTMLInputElement>document.getElementById("inp-email");
+
+// Class
+class Employee {
+  protected _firstName: string;
+  protected _lastName: string;
+  public _email: string;
+
+  constructor(firstName: string, lastName: string, email: string) {
+    this._firstName = firstName;
+    this._lastName = lastName;
+    this._email = email;
+  }
+  get fullName(): string {
+    return `${this._firstName} ${this._lastName}`;
+  }
+}
+
+const emp1 = new Employee("Dan", "Nguyen", "dan@gnail.com");
+console.log(emp1.fullName);
+
+class Manager extends Employee {
+  constructor(firstName: string, lastName: string, email: string) {
+    super(firstName, lastName, email);
+  }
+}
+
+// - Interface
+
+interface ICar {
+  branch: string;
+  color: string;
+  engine: string;
+  releaseDate: string;
+}
+
+class Car implements ICar {
+  constructor(
+    public branch: string,
+    public color: string,
+    public engine: string,
+    public releaseDate: string
+  ) {}
+}
+
+const car = new Car("Toyota", "Silver", "1000cc", "25/10/2020");
